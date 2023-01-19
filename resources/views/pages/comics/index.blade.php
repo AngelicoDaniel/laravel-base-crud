@@ -19,8 +19,12 @@
         <tbody>
             @foreach ($comics as $elem)
             <tr>
-              <th scope="row">1</th>
-              <td>{{$elem->title}}</td>
+              <th scope="row">{{$elem->id}}</th>
+              <td>
+                <a href="{{ route('comics.show', $elem->id) }}">
+                    {{$elem->title}}
+                </a>
+            </td>
               <td>{{!!$elem->description!!}}</td>
               <td>
                 <img src="{{ $elem->thumb }}" class="card-img-top" alt="...">

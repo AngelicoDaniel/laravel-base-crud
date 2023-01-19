@@ -54,7 +54,10 @@ class ComicsController extends Controller
      */
     public function show($id)
     {
-        //
+        $elem = Comic::findOrFail($id);
+        // dd($singolo_elem);
+        return view('pages.comics.show', compact('elem') );
+
     }
 
     /**
