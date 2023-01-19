@@ -14,6 +14,7 @@ class ComicSeeder extends Seeder
     {
         $array_comics = config('comics');
 
+
         foreach ($array_comics as $elem) {
             $new_comic = new Comic();
             $new_comic->title = $elem['title'];
