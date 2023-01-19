@@ -14,7 +14,7 @@ class ComicsController extends Controller
      */
     public function index()
     {
-        $comics = Comic::paginate(4);
+        $comics = Comic::orderBy('id', 'desc')->paginate(4);
 
         $data = [
             'comics' => $comics
@@ -45,13 +45,14 @@ class ComicsController extends Controller
     {
         $data = $request->all();
         $new_record = new Comic();
-        $new_record->title = $data['title'];
-        $new_record->description = $data['description'];
-        $new_record->thumb = $data['thumb'];
-        $new_record->price = $data['price'];
-        $new_record->series = $data['series'];
-        $new_record->sale_date = $data['sale_date'];
-        $new_record->type = $data['type'];
+        $new_record->fill($data);
+        // $new_record->title = $data['title'];
+        // $new_record->description = $data['description'];
+        // $new_record->thumb = $data['thumb'];
+        // $new_record->price = $data['price'];
+        // $new_record->series = $data['series'];
+        // $new_record->sale_date = $data['sale_date'];
+        // $new_record->type = $data['type'];
         $new_record->save();
 
         return redirect()->route('comics.show', ['id'=>$new_record->id]);
