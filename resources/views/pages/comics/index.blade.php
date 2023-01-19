@@ -21,8 +21,10 @@
             <tr>
               <th scope="row">1</th>
               <td>{{$elem->title}}</td>
-              <td>{{$elem->description}}</td>
-              <td>{{$elem->thumb}}</td>
+              <td>{{!!$elem->description!!}}</td>
+              <td>
+                <img src="{{ $elem->thumb }}" class="card-img-top" alt="...">
+              </td>
               <td>{{$elem->price}}</td>
               <td>{{$elem->series}}</td>
               <td>{{$elem->sale_date}}</td>
@@ -31,5 +33,7 @@
             @endforeach
         </tbody>
       </table>
+
+      {{  $comics->links() }}
 @endsection
 
