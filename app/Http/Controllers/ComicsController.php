@@ -44,6 +44,18 @@ class ComicsController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
+        //validate
+        $request->validate(
+            [
+                'title' => 'required|max:50',
+            ],
+            [
+                'title.required' => 'Attenzione! Il campo title è obbligatorio',
+                'title.max:50' => 'Attenzione! Il campo non deve superare i 50 caratteri'
+            ]
+        );
+
         $new_record = new Comic();
         $new_record->fill($data);
         // $new_record->title = $data['title'];
@@ -80,7 +92,9 @@ class ComicsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comic = Comic::findOrFail($id);
+
+        return view('pages.comics.edit', compact('comic'));
     }
 
     /**
@@ -92,7 +106,12 @@ class ComicsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $comic = Comic::findOrFail($id);
+        $comic->update($data);
+
+        return redirect()->route('comics.show', $comic->id)->with('success', "Hai modificato con successo il fumetto:
+            $comic->title");
     }
 
     /**
@@ -105,6 +124,6 @@ class ComicsController extends Controller
     {
         $comic = Comic::findOrFail($id);
         $comic->delete();
-        return redirect()->route('comics.index')->with('success', "hai cancellato con successo il fumetto $comic->title");
+        return redirect()->route('comics.index')->with('success', "hai cancellato con successo il fumetto: $comic->title");
     }
 }

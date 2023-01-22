@@ -4,7 +4,11 @@
 @endsection
 @section('main-content')
     <h1>SINGOLO FUMETTO</h1>
-
+    @if (session('success') )
+    <div class="alert alert-success my-3">
+        {{ session('success') }}
+    </div>
+    @endif
 
     <div class="card m-auto" style="width: 18rem;">
         <img src="{{ $elem->thumb }}" class="card-img-top" alt="...">

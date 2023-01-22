@@ -46,6 +46,9 @@
                     @method('DELETE')
                     <button class="btn btn-dark" type="submit">X</button>
                 </form>
+                <form>
+                <a href="{{route('comics.edit', $elem->id)}}">EDIT</a>
+                </form>
               </td>
             </tr>
             @endforeach
