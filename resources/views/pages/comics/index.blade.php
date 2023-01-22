@@ -4,6 +4,12 @@
 @section('main-content')
     <h1>LA LISTA DEI FUMETTI</h1>
 
+    @if (session('success') )
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <table class="table">
         <thead>
           <tr>
@@ -34,6 +40,13 @@
               <td>{{$elem->series}}</td>
               <td>{{$elem->sale_date}}</td>
               <td>{{$elem->type}}</td>
+              <td>
+                <form action="{{route('comics.destroy', $elem->id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-dark" type="submit">X</button>
+                </form>
+              </td>
             </tr>
             @endforeach
         </tbody>
